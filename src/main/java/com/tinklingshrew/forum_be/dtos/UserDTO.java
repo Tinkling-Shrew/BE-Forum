@@ -1,50 +1,26 @@
-package com.tinklingshrew.forum_be.entities;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+package com.tinklingshrew.forum_be.dtos;
 
 
 import java.util.Date;
-import java.util.Set;
 
-@Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserDTO {
     private Long id;
 
-    @Column
     private String rank;
 
-    @Column
     private Long karma;
 
-    @Column
     private String description;
 
-    @Column
     private String username;
 
-    @Column
     private Date date_of_creation;
 
-    @Column
     private String password;
 
-    @Column
     private String pfp_url;
 
-    @Column
     private String header_url;
-
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
-    private Set<Post> posts;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
-    private Set<Comment> comments;
 
     public Long getId() {
         return id;
@@ -116,21 +92,5 @@ public class User {
 
     public void setHeader_url(String header_url) {
         this.header_url = header_url;
-    }
-
-    public Set<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(Set<Post> posts) {
-        this.posts = posts;
-    }
-
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
     }
 }
