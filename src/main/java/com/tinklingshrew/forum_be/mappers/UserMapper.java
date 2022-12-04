@@ -20,7 +20,7 @@ public class UserMapper {
         User user = new User();
 
         user.setDescription(userDto.getDescription());
-        user.setRank(userDto.getRank());
+        user.setRole(userDto.getRole());
         user.setHeader_url(userDto.getHeader_url());
         user.setPfp_url(userDto.getPfp_url());
         user.setUsername(userDto.getUsername());
@@ -35,7 +35,7 @@ public class UserMapper {
         UserDTO userDto = new UserDTO();
         userDto.setId(user.getId());
         userDto.setDescription(user.getDescription());
-        userDto.setRank(user.getRank());
+        userDto.setRole(user.getRole());
         userDto.setHeader_url(user.getHeader_url());
         userDto.setPfp_url(user.getPfp_url());
         userDto.setUsername(user.getUsername());

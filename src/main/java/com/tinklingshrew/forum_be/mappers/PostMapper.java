@@ -24,53 +24,53 @@ public class PostMapper {
         this.userRepo = userRepo;
     }
 
-    public static Post toEntity(PostDTO pollDto){
+    public static Post toEntity(PostDTO postDto){
         Post post = new Post();
 
-        Optional<User> existingUser = userRepo.findById(pollDto.getUserId());
+        Optional<User> existingUser = userRepo.findById(postDto.getUserId());
         if (!existingUser.isPresent()) {
-            throw new CustomException(HttpStatus.NOT_FOUND,"User with id: "+pollDto.getUserId()+" not found");
+            throw new CustomException(HttpStatus.NOT_FOUND,"User with id: "+postDto.getUserId()+" not found");
         }
         User userEntity = existingUser.get();
         post.setUser(userEntity);
-        post.setContent(pollDto.getContent());
-        post.setKarma(pollDto.getKarma());
-        post.setTitle(pollDto.getTitle());
+        post.setContent(postDto.getContent());
+        post.setKarma(postDto.getKarma());
+        post.setTitle(postDto.getTitle());
 
-        //poll.setAnswers(pollDto.getAnswers());
+        //post.setAnswers(postDto.getAnswers());
         return post;
     }
 
-    public static PostDTO toDto(Post poll){
-        PostDTO pollDto = new PostDTO();
-        pollDto.setId(poll.getId());
-        pollDto.setUserId(poll.getUser().getId());
-        pollDto.setContent(poll.getContent());
-        pollDto.setKarma(poll.getKarma());
-        pollDto.setTitle(poll.getTitle());
+    public static PostDTO toDto(Post post){
+        PostDTO postDto = new PostDTO();
+        postDto.setId(post.getId());
+        postDto.setUserId(post.getUser().getId());
+        postDto.setContent(post.getContent());
+        postDto.setKarma(post.getKarma());
+        postDto.setTitle(post.getTitle());
 
-        //pollDto.setAnswers(poll.getAnswers());
-        return pollDto;
+        //postDto.setAnswers(post.getAnswers());
+        return postDto;
     }
 
-    public static Set<Post> toSetEntity(Set<PostDTO> pollDtos){
-        Set<Post> polls = new HashSet<>();
-        Iterator<PostDTO> it = pollDtos.iterator();
+    public static Set<Post> toSetEntity(Set<PostDTO> postDtos){
+        Set<Post> posts = new HashSet<>();
+        Iterator<PostDTO> it = postDtos.iterator();
         while(it.hasNext()){
-            Post poll = PostMapper.toEntity(it.next());
-            polls.add(poll);
+            Post post = PostMapper.toEntity(it.next());
+            posts.add(post);
         }
-        return polls;
+        return posts;
     }
 
-    public static Set<PostDTO> toSetDto(Set<Post> polls){
-        Set<PostDTO> pollDtos = new HashSet<>();
-        Iterator<Post> it = polls.iterator();
+    public static Set<PostDTO> toSetDto(Set<Post> posts){
+        Set<PostDTO> postDtos = new HashSet<>();
+        Iterator<Post> it = posts.iterator();
         while(it.hasNext()){
-            PostDTO poll = PostMapper.toDto(it.next());
-            pollDtos.add(poll);
+            PostDTO post = PostMapper.toDto(it.next());
+            postDtos.add(post);
         }
-        return pollDtos;
+        return postDtos;
 
     }
 }

@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface CommentRepository extends JpaRepository<Comment,Long> {
-    Set<Comment> findCommentsByPost(Post pollEntity);
+    Set<Comment> findCommentsByPost(Post postEntity);
 
     Set<Comment> findCommentsByUser(User userEntity);
 

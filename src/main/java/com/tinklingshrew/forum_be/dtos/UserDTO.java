@@ -6,7 +6,7 @@ import java.util.Date;
 public class UserDTO {
     private Long id;
 
-    private String rank;
+    private String role;
 
     private Long karma;
 
@@ -30,12 +30,12 @@ public class UserDTO {
         this.id = id;
     }
 
-    public String getRank() {
-        return rank;
+    public String getRole() {
+        return role;
     }
 
-    public void setRank(String rank) {
-        this.rank = rank;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Long getKarma() {

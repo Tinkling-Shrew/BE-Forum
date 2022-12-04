@@ -14,7 +14,7 @@ public class User {
     private Long id;
 
     @Column
-    private String rank;
+    private String role;
 
     @Column
     private Long karma;
@@ -54,12 +54,12 @@ public class User {
         this.id = id;
     }
 
-    public String getRank() {
-        return rank;
+    public String getRole() {
+        return role;
     }
 
-    public void setRank(String rank) {
-        this.rank = rank;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Long getKarma() {

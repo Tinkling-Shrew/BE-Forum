@@ -27,9 +27,9 @@ public class CommentService {
     private UserRepository userRepo;
 
     @Autowired
-    public CommentService(CommentRepository commentRepo,PostRepository pollRepo,UserRepository userRepo) {
+    public CommentService(CommentRepository commentRepo,PostRepository postRepo,UserRepository userRepo) {
         this.commentRepo = commentRepo;
-        this.postRepo = pollRepo;
+        this.postRepo = postRepo;
         this.userRepo = userRepo;
     }
 
@@ -39,8 +39,8 @@ public class CommentService {
         if (existingPost.isEmpty()) {
             throw new CustomException(HttpStatus.NOT_FOUND,"User with id: "+id+" not found");
         }
-        Post pollEntity = existingPost.get();
-        Set<Comment> answerEntities = commentRepo.findCommentsByPost(pollEntity);
+        Post postEntity = existingPost.get();
+        Set<Comment> answerEntities = commentRepo.findCommentsByPost(postEntity);
         return CommentMapper.toSetDto(answerEntities);
     }
 
