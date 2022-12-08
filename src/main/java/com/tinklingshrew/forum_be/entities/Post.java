@@ -1,8 +1,8 @@
 package com.tinklingshrew.forum_be.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-
+//import jakarta.persistence.*;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity

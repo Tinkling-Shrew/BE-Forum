@@ -7,11 +7,13 @@ import com.tinklingshrew.forum_be.exceptions.CustomException;
 import com.tinklingshrew.forum_be.mappers.PostMapper;
 import com.tinklingshrew.forum_be.repositories.PostRepository;
 import com.tinklingshrew.forum_be.repositories.UserRepository;
-import jakarta.transaction.Transactional;
+//import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;

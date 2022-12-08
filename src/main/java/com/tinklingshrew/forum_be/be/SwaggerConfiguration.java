@@ -1,4 +1,4 @@
-package com.tinklingshrew.forum_be;
+package com.tinklingshrew.forum_be.be;
 
 
 import org.springframework.context.annotation.Bean;
@@ -8,7 +8,7 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
-@Configuration
+
 public class SwaggerConfiguration {
     @Bean()
     public Docket api() {
