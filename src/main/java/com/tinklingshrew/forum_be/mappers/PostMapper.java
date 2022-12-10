@@ -7,6 +7,7 @@ import com.tinklingshrew.forum_be.exceptions.CustomException;
 import com.tinklingshrew.forum_be.repositories.UserRepository;
 import com.tinklingshrew.forum_be.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 
+@Configuration
 public class PostMapper {
     private static UserService userService;
     private static UserRepository userRepo;

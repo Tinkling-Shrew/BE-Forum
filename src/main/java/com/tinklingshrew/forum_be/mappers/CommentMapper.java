@@ -9,6 +9,7 @@ import com.tinklingshrew.forum_be.repositories.CommentRepository;
 import com.tinklingshrew.forum_be.repositories.PostRepository;
 import com.tinklingshrew.forum_be.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 
 import java.util.HashSet;
@@ -16,15 +17,17 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 
+@Configuration
 public class CommentMapper {
     private static UserRepository userRepo;
     private static PostRepository postRepo;
     private static CommentRepository commentRepo;
 
     @Autowired
-    public CommentMapper(UserRepository userRepo,PostRepository postRepo) {
+    public CommentMapper(UserRepository userRepo,PostRepository postRepo,CommentRepository commentRepo) {
         this.userRepo = userRepo;
         this.postRepo = postRepo;
+        this.commentRepo = commentRepo;
     }
 
     public static Comment toEntity(CommentDTO commentDto){
@@ -60,7 +63,10 @@ public class CommentMapper {
         CommentDTO commentDto = new CommentDTO();
         commentDto.setId(comment.getId());
         commentDto.setContent(comment.getContent());
-        commentDto.setParentId(comment.getParent().getId());
+        if (comment.getParent() != null)
+            commentDto.setParentId(comment.getParent().getId());
+        else
+            commentDto.setParentId(null);
         commentDto.setUserId(comment.getUser().getId());
         commentDto.setPostId(comment.getPost().getId());
         return commentDto;
