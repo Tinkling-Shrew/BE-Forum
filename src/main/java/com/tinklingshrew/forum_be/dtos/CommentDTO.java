@@ -1,6 +1,6 @@
 package com.tinklingshrew.forum_be.dtos;
 
-public class CommentDTO {
+public class CommentDTO implements Comparable<CommentDTO>{
     private Long id;
 
     private String content;
@@ -49,5 +49,19 @@ public class CommentDTO {
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
+    }
+
+    @Override
+    public int compareTo(CommentDTO o) {
+        if(this.id == o.getId()) {
+            return 0;
+        }
+        else if(this.id > o.getId()) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+
     }
 }

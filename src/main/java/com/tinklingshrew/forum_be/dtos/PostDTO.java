@@ -1,7 +1,7 @@
 package com.tinklingshrew.forum_be.dtos;
 
 
-public class PostDTO {
+public class PostDTO implements Comparable<PostDTO> {
     private Long id;
 
     private Long karma;
@@ -49,5 +49,19 @@ public class PostDTO {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public int compareTo(PostDTO o) {
+        if(this.id == o.getId()) {
+            return 0;
+        }
+        else if(this.id > o.getId()) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+
     }
 }

@@ -8,9 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
     private final UserService userService;
     @Autowired
@@ -19,9 +22,9 @@ public class UserController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Set<UserDTO>> getAllUsers () {
-        Set<UserDTO> users = userService.findAllUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+    public ResponseEntity<TreeSet<UserDTO>> getAllPosts () {
+        TreeSet<UserDTO> postDTOS = new TreeSet<>(userService.findAllUsers().stream().collect(Collectors.toList()));
+        return new ResponseEntity<>(postDTOS, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

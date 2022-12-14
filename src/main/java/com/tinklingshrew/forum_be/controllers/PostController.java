@@ -7,10 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/posts")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PostController {
     private final PostService postService;
     @Autowired
@@ -19,8 +23,8 @@ public class PostController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Set<PostDTO>> getAllPosts () {
-        Set<PostDTO> postDTOS = postService.findAllPosts();
+    public ResponseEntity<TreeSet<PostDTO>> getAllPosts () {
+        TreeSet<PostDTO> postDTOS = new TreeSet<>(postService.findAllPosts().stream().collect(Collectors.toList()));
         return new ResponseEntity<>(postDTOS, HttpStatus.OK);
     }
 

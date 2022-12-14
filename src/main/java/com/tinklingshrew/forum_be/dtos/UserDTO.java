@@ -3,7 +3,7 @@ package com.tinklingshrew.forum_be.dtos;
 
 import java.util.Date;
 
-public class UserDTO {
+public class UserDTO implements Comparable<UserDTO> {
     private Long id;
 
     private String role;
@@ -92,5 +92,19 @@ public class UserDTO {
 
     public void setHeader_url(String header_url) {
         this.header_url = header_url;
+    }
+
+    @Override
+    public int compareTo(UserDTO o) {
+        if(this.id == o.getId()) {
+            return 0;
+        }
+        else if(this.id > o.getId()) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+
     }
 }

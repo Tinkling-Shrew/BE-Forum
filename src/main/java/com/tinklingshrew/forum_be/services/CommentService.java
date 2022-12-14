@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
@@ -41,8 +42,8 @@ public class CommentService {
             throw new CustomException(HttpStatus.NOT_FOUND,"User with id: "+id+" not found");
         }
         Post postEntity = existingPost.get();
-        Set<Comment> answerEntities = commentRepo.findCommentsByPost(postEntity);
-        return CommentMapper.toSetDto(answerEntities);
+        Set<Comment> commentEntities = commentRepo.findCommentsByPost(postEntity);
+        return CommentMapper.toSetDto(commentEntities);
     }
 
     public Set<CommentDTO> findCommentsByUserId(Long id){
@@ -51,23 +52,24 @@ public class CommentService {
             throw new CustomException(HttpStatus.NOT_FOUND,"User with id: "+id+" not found");
         }
         User userEntity = existingUser.get();
-        Set<Comment> answerEntities = commentRepo.findCommentsByUser(userEntity);
-        return CommentMapper.toSetDto(answerEntities);
+        Set<Comment> commentEntities = commentRepo.findCommentsByUser(userEntity);
+        return CommentMapper.toSetDto(commentEntities);
+    }
+
+    public Set<CommentDTO> findCommentsByParentId(Long id){
+        Optional<Comment> existingComment = commentRepo.findById(id);
+        if (existingComment.isEmpty()) {
+            throw new CustomException(HttpStatus.NOT_FOUND,"Comment with id: "+id+" not found");
+        }
+        Comment commentEntity = existingComment.get();
+        Set<Comment> commentEntities = commentRepo.findCommentsByParent(commentEntity);
+        return CommentMapper.toSetDto(commentEntities);
     }
 
     public CommentDTO addComment(CommentDTO answerDto){
         Comment answer = CommentMapper.toEntity(answerDto);
         Comment savedComment = commentRepo.save(answer);
         return CommentMapper.toDto(savedComment);
-    }
-
-    public CommentDTO findCommentById(Long id){
-        Optional<Comment> existingComment = commentRepo.findById(id);
-        if (existingComment.isEmpty()) {
-            throw new CustomException(HttpStatus.NOT_FOUND,"User with id: "+id+" not found");
-        }
-        Comment answerEntity = existingComment.get();
-        return CommentMapper.toDto(answerEntity);
     }
 
     public void deleteComment(Long id){
@@ -77,4 +79,5 @@ public class CommentService {
         }
         commentRepo.deleteCommentById(id);
     }
+
 }

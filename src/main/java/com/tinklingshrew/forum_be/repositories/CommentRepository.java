@@ -13,5 +13,7 @@ public interface CommentRepository extends JpaRepository<Comment,Long> {
 
     Set<Comment> findCommentsByUser(User userEntity);
 
+    Set<Comment> findCommentsByParent(Comment commentEntity);
+
     void deleteCommentById(Long id);
 }
