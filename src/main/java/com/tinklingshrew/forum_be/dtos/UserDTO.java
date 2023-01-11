@@ -22,6 +22,14 @@ public class UserDTO implements Comparable<UserDTO> {
 
     private String header_url;
 
+    public UserDTO() {
+    }
+
+    public UserDTO(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }

@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("")
-    public ResponseEntity<TreeSet<UserDTO>> getAllPosts () {
+    public ResponseEntity<TreeSet<UserDTO>> getAllUsers () {
         TreeSet<UserDTO> postDTOS = new TreeSet<>(userService.findAllUsers().stream().collect(Collectors.toList()));
         return new ResponseEntity<>(postDTOS, HttpStatus.OK);
     }

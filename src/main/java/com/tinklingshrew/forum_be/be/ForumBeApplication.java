@@ -25,7 +25,8 @@ import java.util.Arrays;
         UserService.class,PostService.class,CommentService.class, //
         UserMapper.class, PostMapper.class, CommentMapper.class, //
         ForumBeApplication.class, //
-        SwaggerConfiguration.class })
+        SwaggerConfiguration.class,
+        WebSecurityConfig.class })
 @EntityScan(basePackages = { "com.tinklingshrew.forum_be.entities"})
 @EnableJpaRepositories(basePackages = { "com.tinklingshrew.forum_be.repositories" })
 

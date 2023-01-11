@@ -41,7 +41,7 @@ public class UserService {
 
     public UserDTO findUserById(Long userId){
         Optional<User> existingUser = userRepository.findById(userId);
-        if (!existingUser.isPresent()) {
+        if (existingUser.isEmpty()) {
             throw new CustomException(HttpStatus.NOT_FOUND,"User with id: "+userId+" not found");
         }
         User userEntity = existingUser.get();
@@ -49,9 +49,18 @@ public class UserService {
         return  updatedUserDto;
     }
 
+    public UserDTO findUserByUsername(String username){
+        Optional<User> existingUser = userRepository.findByUsername(username);
+        if (existingUser.isEmpty()) {
+            return null;
+        }
+        User userEntity = existingUser.get();
+        return UserMapper.toDto(userEntity);
+    }
+
     public void deleteUser(Long userId){
         Optional<User> existingUser = userRepository.findById(userId);
-        if (!existingUser.isPresent()) {
+        if (existingUser.isEmpty()) {
             throw new CustomException(HttpStatus.NOT_FOUND,"User with id: "+userId+" not found");
         }
         userRepository.deleteUserById(userId);
