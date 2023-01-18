@@ -45,11 +45,16 @@ public class CommentMapper {
         }
         Post postEntity = existingPost.get();
 
-        // Try to find a parent comment. If there's none, set the parent to null.
-        Optional<Comment> parentComment = commentRepo.findById(commentDto.getParentId());
         Comment parentCommentEntity = null;
-        if (parentComment.isPresent())
-            parentCommentEntity = parentComment.get();
+        // Try to find a parent comment. If there's none, set the parent to null.
+        if (commentDto.getParentId() == null){
+            parentCommentEntity = null;
+        }
+        else{
+            Optional<Comment> parentComment = commentRepo.findById(commentDto.getParentId());
+            if (parentComment.isPresent())
+                parentCommentEntity = parentComment.get();
+        }
 
         comment.setId(commentDto.getId());
         comment.setContent(commentDto.getContent());
