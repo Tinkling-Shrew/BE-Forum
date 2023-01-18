@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 
+import javax.persistence.Id;
 import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
@@ -33,6 +34,13 @@ public class UserService {
         User savedUser = userRepository.save(user);
         UserDTO newUserDto = UserMapper.toDto(savedUser);
         return  newUserDto;
+    }
+
+    public UserDTO updateUser(UserDTO userDto){
+        User user = UserMapper.toEntity(userDto);
+        User savedUser = userRepository.save(user);
+        UserDTO updatedUserDto = UserMapper.toDto(savedUser);
+        return  updatedUserDto;
     }
     public Set<UserDTO> findAllUsers(){
         Set<User> users = new HashSet<User>(userRepository.findAll());
