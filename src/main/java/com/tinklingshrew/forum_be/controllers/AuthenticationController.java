@@ -2,12 +2,16 @@ package com.tinklingshrew.forum_be.controllers;
 
 import com.google.common.hash.Hashing;
 import com.tinklingshrew.forum_be.dtos.UserDTO;
+import com.tinklingshrew.forum_be.dtos.UserLoginDTO;
 import com.tinklingshrew.forum_be.dtos.UserRegisterDTO;
 import com.tinklingshrew.forum_be.entities.User;
 import com.tinklingshrew.forum_be.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.nio.charset.StandardCharsets;
@@ -38,5 +42,16 @@ public class AuthenticationController {
         if(finalUser != null)
             return "success";
         return "error";
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserDTO> loginAccount(@RequestBody UserLoginDTO userLoginDTO) throws NoSuchAlgorithmException {
+        System.out.println(userLoginDTO.getEmail() + " " + userLoginDTO.getPassword());
+        UserDTO user = userService.findUserByEmailAndPassword(userLoginDTO.getEmail(), userLoginDTO.getPassword());
+
+        if(user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 }

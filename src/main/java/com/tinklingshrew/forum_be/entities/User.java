@@ -24,6 +24,8 @@ public class User {
 
     @Column
     private String username;
+    @Column
+    private String email;
 
     @Column
     private Date date_of_creation;
@@ -132,5 +134,13 @@ public class User {
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

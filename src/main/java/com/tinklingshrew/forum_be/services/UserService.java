@@ -66,6 +66,17 @@ public class UserService {
         return UserMapper.toDto(userEntity);
     }
 
+    public UserDTO findUserByEmailAndPassword(String email, String password) {
+        Optional<User> existingUser = userRepository.findUserByEmailAndPassword(email, password);
+
+        if(existingUser.isEmpty()) {
+            return null;
+        }
+
+        User userEntity = existingUser.get();
+        return UserMapper.toDto(userEntity);
+    }
+
     public void deleteUser(Long userId){
         Optional<User> existingUser = userRepository.findById(userId);
         if (existingUser.isEmpty()) {

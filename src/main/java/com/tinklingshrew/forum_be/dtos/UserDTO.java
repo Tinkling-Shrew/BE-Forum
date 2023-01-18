@@ -14,6 +14,16 @@ public class UserDTO implements Comparable<UserDTO> {
 
     private String username;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    private String email;
+
     private Date date_of_creation;
 
     private String password;

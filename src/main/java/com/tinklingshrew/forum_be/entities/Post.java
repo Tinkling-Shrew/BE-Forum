@@ -21,7 +21,7 @@ public class Post {
     private String content;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comment> comments;
 
     @ManyToOne()
