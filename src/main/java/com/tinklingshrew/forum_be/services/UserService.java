@@ -37,8 +37,18 @@ public class UserService {
     }
 
     public UserDTO updateUser(UserDTO userDto){
-        User user = UserMapper.toEntity(userDto);
-        User savedUser = userRepository.save(user);
+        Long id = userDto.getId();
+
+        Optional<User> existingUser = userRepository.findById(id);
+        if (existingUser.isEmpty()) {
+            throw new CustomException(HttpStatus.NOT_FOUND,"User with id: "+id+" not found");
+        }
+        User userEntity = existingUser.get();
+        userEntity.setUsername(userDto.getUsername());
+        userEntity.setHeader_url(userDto.getHeader_url());
+        userEntity.setPfp_url(userDto.getPfp_url());
+
+        User savedUser = userRepository.save(userEntity);
         UserDTO updatedUserDto = UserMapper.toDto(savedUser);
         return  updatedUserDto;
     }
